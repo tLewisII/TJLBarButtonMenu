@@ -18,6 +18,14 @@
 		DB79B5B217C5AFB400173A70 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB79B5B117C5AFB400173A70 /* Default-568h@2x.png */; };
 		DB79B5B517C5AFB400173A70 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB79B5B317C5AFB400173A70 /* MainStoryboard.storyboard */; };
 		DB79B5B817C5AFB400173A70 /* TJLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB79B5B717C5AFB400173A70 /* TJLViewController.m */; };
+		DB79B5C417C5B00C00173A70 /* Blue.png in Resources */ = {isa = PBXBuildFile; fileRef = DB79B5BE17C5B00C00173A70 /* Blue.png */; };
+		DB79B5C517C5B00C00173A70 /* Blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB79B5BF17C5B00C00173A70 /* Blue@2x.png */; };
+		DB79B5C617C5B00C00173A70 /* Green.png in Resources */ = {isa = PBXBuildFile; fileRef = DB79B5C017C5B00C00173A70 /* Green.png */; };
+		DB79B5C717C5B00C00173A70 /* Green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB79B5C117C5B00C00173A70 /* Green@2x.png */; };
+		DB79B5C817C5B00C00173A70 /* Orange.png in Resources */ = {isa = PBXBuildFile; fileRef = DB79B5C217C5B00C00173A70 /* Orange.png */; };
+		DB79B5C917C5B00C00173A70 /* Orange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB79B5C317C5B00C00173A70 /* Orange@2x.png */; };
+		DB79B5CC17C5B06100173A70 /* TJLBarButtonMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = DB79B5CB17C5B06100173A70 /* TJLBarButtonMenu.m */; };
+		DB79B5CF17C5B12B00173A70 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB79B5CE17C5B12B00173A70 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +45,15 @@
 		DB79B5B417C5AFB400173A70 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		DB79B5B617C5AFB400173A70 /* TJLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TJLViewController.h; sourceTree = "<group>"; };
 		DB79B5B717C5AFB400173A70 /* TJLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TJLViewController.m; sourceTree = "<group>"; };
+		DB79B5BE17C5B00C00173A70 /* Blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue.png; sourceTree = "<group>"; };
+		DB79B5BF17C5B00C00173A70 /* Blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blue@2x.png"; sourceTree = "<group>"; };
+		DB79B5C017C5B00C00173A70 /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Green.png; sourceTree = "<group>"; };
+		DB79B5C117C5B00C00173A70 /* Green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Green@2x.png"; sourceTree = "<group>"; };
+		DB79B5C217C5B00C00173A70 /* Orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Orange.png; sourceTree = "<group>"; };
+		DB79B5C317C5B00C00173A70 /* Orange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Orange@2x.png"; sourceTree = "<group>"; };
+		DB79B5CA17C5B06100173A70 /* TJLBarButtonMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TJLBarButtonMenu.h; path = Source/TJLBarButtonMenu.h; sourceTree = "<group>"; };
+		DB79B5CB17C5B06100173A70 /* TJLBarButtonMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TJLBarButtonMenu.m; path = Source/TJLBarButtonMenu.m; sourceTree = "<group>"; };
+		DB79B5CE17C5B12B00173A70 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB79B5CF17C5B12B00173A70 /* QuartzCore.framework in Frameworks */,
 				DB79B59C17C5AFB400173A70 /* UIKit.framework in Frameworks */,
 				DB79B59E17C5AFB400173A70 /* Foundation.framework in Frameworks */,
 				DB79B5A017C5AFB400173A70 /* CoreGraphics.framework in Frameworks */,
@@ -73,6 +91,7 @@
 		DB79B59A17C5AFB400173A70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DB79B5CE17C5B12B00173A70 /* QuartzCore.framework */,
 				DB79B59B17C5AFB400173A70 /* UIKit.framework */,
 				DB79B59D17C5AFB400173A70 /* Foundation.framework */,
 				DB79B59F17C5AFB400173A70 /* CoreGraphics.framework */,
@@ -86,6 +105,13 @@
 				DB79B5AA17C5AFB400173A70 /* TJLAppDelegate.h */,
 				DB79B5AB17C5AFB400173A70 /* TJLAppDelegate.m */,
 				DB79B5B317C5AFB400173A70 /* MainStoryboard.storyboard */,
+				DB79B5CD17C5B06500173A70 /* Source */,
+				DB79B5BE17C5B00C00173A70 /* Blue.png */,
+				DB79B5BF17C5B00C00173A70 /* Blue@2x.png */,
+				DB79B5C017C5B00C00173A70 /* Green.png */,
+				DB79B5C117C5B00C00173A70 /* Green@2x.png */,
+				DB79B5C217C5B00C00173A70 /* Orange.png */,
+				DB79B5C317C5B00C00173A70 /* Orange@2x.png */,
 				DB79B5B617C5AFB400173A70 /* TJLViewController.h */,
 				DB79B5B717C5AFB400173A70 /* TJLViewController.m */,
 				DB79B5A217C5AFB400173A70 /* Supporting Files */,
@@ -105,6 +131,15 @@
 				DB79B5B117C5AFB400173A70 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DB79B5CD17C5B06500173A70 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				DB79B5CA17C5B06100173A70 /* TJLBarButtonMenu.h */,
+				DB79B5CB17C5B06100173A70 /* TJLBarButtonMenu.m */,
+			);
+			name = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +199,12 @@
 				DB79B5B017C5AFB400173A70 /* Default@2x.png in Resources */,
 				DB79B5B217C5AFB400173A70 /* Default-568h@2x.png in Resources */,
 				DB79B5B517C5AFB400173A70 /* MainStoryboard.storyboard in Resources */,
+				DB79B5C417C5B00C00173A70 /* Blue.png in Resources */,
+				DB79B5C517C5B00C00173A70 /* Blue@2x.png in Resources */,
+				DB79B5C617C5B00C00173A70 /* Green.png in Resources */,
+				DB79B5C717C5B00C00173A70 /* Green@2x.png in Resources */,
+				DB79B5C817C5B00C00173A70 /* Orange.png in Resources */,
+				DB79B5C917C5B00C00173A70 /* Orange@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +218,7 @@
 				DB79B5A817C5AFB400173A70 /* main.m in Sources */,
 				DB79B5AC17C5AFB400173A70 /* TJLAppDelegate.m in Sources */,
 				DB79B5B817C5AFB400173A70 /* TJLViewController.m in Sources */,
+				DB79B5CC17C5B06100173A70 /* TJLBarButtonMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

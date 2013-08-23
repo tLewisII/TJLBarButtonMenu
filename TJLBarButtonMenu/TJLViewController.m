@@ -7,23 +7,33 @@
 //
 
 #import "TJLViewController.h"
+#import "TJLBarButtonMenu.h"
 
 @interface TJLViewController ()
-
+@property(strong, nonatomic) TJLBarButtonMenu *barMenu;
 @end
 
 @implementation TJLViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (IBAction)showRight:(UIBarButtonItem *)sender {
+    NSArray *images = @[
+            [UIImage imageNamed:@"Blue"],
+            [UIImage imageNamed:@"Green"],
+            [UIImage imageNamed:@"Orange"]
+    ];
+    self.barMenu = [[TJLBarButtonMenu alloc]initWithView:self.view images:images buttonTitles:@[@"1", @"2", @"3"]];
+    __weak id weakSelf = self;
+    [self.barMenu setButtonTappedBlock:^(TJLBarButtonMenu *buttonView, NSString *title) {
+        __strong id strongSelf = weakSelf;
+        [strongSelf performSegueWithIdentifier:@"segue" sender:nil];
+    }];
+    [self.barMenu show];
 }
 
 @end
