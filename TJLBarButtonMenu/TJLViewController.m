@@ -24,10 +24,12 @@
 - (IBAction)showRight:(UIBarButtonItem *)sender {
     NSArray *images = @[
             [UIImage imageNamed:@"Blue"],
-            [UIImage imageNamed:@"Green"],
-            [UIImage imageNamed:@"Orange"]
+            [UIImage imageNamed:@"Green"]
     ];
-    TJLBarButtonMenu *barMenu = [[TJLBarButtonMenu alloc]initWithView:self.view images:images buttonTitles:@[@"1", @"2", @"3"] position:TJLBarButtonMenuRightTop];
+    TJLBarButtonMenu *barMenu = [[TJLBarButtonMenu alloc]initWithView:self.view
+                                                               images:images
+                                                         buttonTitles:@[@"1", @"2"]
+                                                             position:TJLBarButtonMenuRightTop];
    
     [barMenu setButtonTappedBlock:^(TJLBarButtonMenu *buttonView, NSString *title) {
         NSLog(@"%@", title);
@@ -40,7 +42,10 @@
                         [UIImage imageNamed:@"Green"],
                         [UIImage imageNamed:@"Orange"]
                         ];
-    TJLBarButtonMenu *barMenu = [[TJLBarButtonMenu alloc]initWithView:self.view images:images buttonTitles:@[@"1", @"2", @"3"] position:TJLBarButtonMenuLeftTop];
+    TJLBarButtonMenu *barMenu = [[TJLBarButtonMenu alloc]initWithView:self.view
+                                                               images:images
+                                                         buttonTitles:@[@"1", @"2", @"3"]
+                                                             position:TJLBarButtonMenuLeftTop];
     
     [barMenu setButtonTappedBlock:^(TJLBarButtonMenu *buttonView, NSString *title) {
         NSLog(@"%@", title);

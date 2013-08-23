@@ -12,7 +12,7 @@
     TJLButtonTappedBlock buttonTappedBlock;
 }
 @property(strong, nonatomic) NSMutableArray *constraintsArray;
-@property(strong, nonatomic) NSArray *firstConstraints;
+@property(strong, nonatomic) NSMutableArray *firstConstraints;
 @property(strong, nonatomic) UIView *parentView;
 @property(strong, nonatomic) NSMutableArray *buttonArray;
 @property(strong, nonatomic) id <TJLButtonViewDelegate> delegate;
@@ -87,7 +87,7 @@
                                         toItem:nil
                                      attribute:NSLayoutAttributeNotAnAttribute
                                     multiplier:1.0
-                                      constant:60],
+                                      constant:50],
                     [NSLayoutConstraint
                             constraintWithItem:b
                                      attribute:NSLayoutAttributeHeight
@@ -141,7 +141,7 @@
             [NSLayoutConstraint constraintWithItem:self attribute:self.rightLeftPosition relatedBy:NSLayoutRelationEqual toItem:self.parentView attribute:self.rightLeftPosition multiplier:1.0 constant:0]
     ]];
     [self.parentView layoutSubviews];
-    self.firstConstraints = @[
+    self.firstConstraints = [@[
             @[[NSLayoutConstraint
                     constraintWithItem:self.buttonArray[0]
                              attribute:self.finalButtonConstant
@@ -162,24 +162,6 @@
             @[
                     [NSLayoutConstraint
                             constraintWithItem:self.buttonArray[1]
-                                     attribute:self.finalButtonConstant
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self
-                                     attribute:self.finalButtonConstant
-                                    multiplier:1.0
-                                      constant:0],
-                    [NSLayoutConstraint
-                            constraintWithItem:self.buttonArray[1]
-                                     attribute:NSLayoutAttributeBottom
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self
-                                     attribute:NSLayoutAttributeBottom
-                                    multiplier:1.0
-                                      constant:0]
-            ],
-            @[
-                    [NSLayoutConstraint
-                            constraintWithItem:self.buttonArray[2]
                                      attribute:self.rightLeftPosition
                                      relatedBy:NSLayoutRelationEqual
                                         toItem:self
@@ -187,7 +169,7 @@
                                     multiplier:1.0
                                       constant:self.initialButtonConstant],
                     [NSLayoutConstraint
-                            constraintWithItem:self.buttonArray[2]
+                            constraintWithItem:self.buttonArray[1]
                                      attribute:NSLayoutAttributeBottom
                                      relatedBy:NSLayoutRelationEqual
                                         toItem:self
@@ -195,8 +177,29 @@
                                     multiplier:1.0
                                       constant:-15]
             ]
-    ];
-
+    ]mutableCopy];
+    
+    if(self.buttonArray.count > 2) {
+        self.firstConstraints[2] = @[
+                            [NSLayoutConstraint
+                                    constraintWithItem:self.buttonArray[2]
+                                             attribute:self.finalButtonConstant
+                                             relatedBy:NSLayoutRelationEqual
+                                                toItem:self
+                                             attribute:self.finalButtonConstant
+                                            multiplier:1.0
+                                              constant:0],
+                            [NSLayoutConstraint
+                                    constraintWithItem:self.buttonArray[2]
+                                             attribute:NSLayoutAttributeBottom
+                                             relatedBy:NSLayoutRelationEqual
+                                                toItem:self
+                                             attribute:NSLayoutAttributeBottom
+                                            multiplier:1.0
+                                              constant:0]
+                            ];
+    }
+    
     [UIView animateWithDuration:.15 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         [self.buttonArray[0] setHidden:NO];
         [self removeConstraints:self.constraintsArray[0]];
@@ -210,10 +213,12 @@
             [self layoutIfNeeded];
         }                completion:^(BOOL complete) {
             [UIView animateWithDuration:.15 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                [self.buttonArray[2] setHidden:NO];
-                [self removeConstraints:self.constraintsArray[2]];
-                [self addConstraints:self.firstConstraints[2]];
-                [self layoutIfNeeded];
+                if(self.buttonArray.count > 2) {
+                    [self.buttonArray[2] setHidden:NO];
+                    [self removeConstraints:self.constraintsArray[2]];
+                    [self addConstraints:self.firstConstraints[2]];
+                    [self layoutIfNeeded];
+                }
             }                completion:nil];
         }];
     }];
@@ -234,9 +239,11 @@
         }                completion:^(BOOL complete) {
             [self.buttonArray[1] setHidden:YES];
             [UIView animateWithDuration:.15 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                [self removeConstraints:self.firstConstraints[2]];
-                [self addConstraints:self.constraintsArray[2]];
-                [self layoutIfNeeded];
+                if(self.buttonArray.count > 2) {
+                    [self removeConstraints:self.firstConstraints[2]];
+                    [self addConstraints:self.constraintsArray[2]];
+                    [self layoutIfNeeded];
+                }
             }                completion:^(BOOL final) {
                 if(buttonTappedBlock) buttonTappedBlock(self, buttonTitle);
                 if([self.delegate respondsToSelector:@selector(buttonMenu:titleForTappedButton:)]) [self.delegate buttonMenu:self titleForTappedButton:buttonTitle];
