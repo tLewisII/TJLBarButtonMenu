@@ -1,7 +1,7 @@
 <h1>TJLBarButtonMenu</h1>
 A simple 3 button menu that is meant to be launched from a bar button item.
-![Two Buttons](http://ploverproductions.com/images/TJLBarButtonMenuLeft.png?raw=true)&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-![One Buttons](http://ploverproductions.com/images/TJLBarButtonMenuRight.png?raw=true)
+![Two Buttons](http://ploverproductions.com/images/TJLBarButtonMenuL.png?raw=true)&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![One Buttons](http://ploverproductions.com/images/TJLBarButtonMenuR.png?raw=true)
 <h2>Installation</h2>
 <hr>
 [Cocoapods](http://www.cocoapods.org) support is forth coming, in the meantime, just grab the source folder and drop it into your project.
