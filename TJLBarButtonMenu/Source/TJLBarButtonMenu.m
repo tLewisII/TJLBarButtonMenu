@@ -16,12 +16,17 @@
 @property(strong, nonatomic) UIView *parentView;
 @property(strong, nonatomic) NSMutableArray *buttonArray;
 @property(strong, nonatomic) id <TJLButtonViewDelegate> delegate;
+@property(nonatomic)NSInteger rightLeftPosition;
+@property(nonatomic)NSInteger initialButtonConstant;
+@property(nonatomic)NSInteger finalButtonConstant;
+@property(nonatomic)NSInteger finalButtonConstant1;
 @end
 
 @implementation TJLBarButtonMenu
-- (instancetype)initWithView:(UIView *)view delegate:(id)delegate images:(NSArray *)images buttonTitles:(NSArray *)titles {
+- (instancetype)initWithView:(UIView *)view delegate:(id)delegate images:(NSArray *)images buttonTitles:(NSArray *)titles position:(TJLBarButtonMenuSide)position {
     self = [super init];
     if(self) {
+        [self setupPositions:position];
         self.parentView = view;
         if(delegate) self.delegate = delegate;
         self.translatesAutoresizingMaskIntoConstraints = NO;
@@ -66,12 +71,12 @@
                               constant:-40];
             NSLayoutConstraint *second = [NSLayoutConstraint
                     constraintWithItem:b
-                             attribute:NSLayoutAttributeRight
+                             attribute:self.rightLeftPosition
                              relatedBy:NSLayoutRelationEqual
                                 toItem:self
-                             attribute:NSLayoutAttributeRight
+                             attribute:self.rightLeftPosition
                             multiplier:1.0
-                              constant:-10];
+                              constant:self.initialButtonConstant];
             [self.constraintsArray addObject:@[first, second]];
             [self addConstraints:@[first, second]];
             [b addConstraints:@[
@@ -97,9 +102,26 @@
     }
     return self;
 }
-
-- (instancetype)initWithView:(UIView *)view images:(NSArray *)images buttonTitles:(NSArray *)titles {
-    return [self initWithView:view delegate:nil images:images buttonTitles:titles];
+-(void)setupPositions:(TJLBarButtonMenuSide)position {
+    switch (position) {
+        case TJLBarButtonMenuRightTop:
+            self.rightLeftPosition = NSLayoutAttributeRight;
+            self.initialButtonConstant = -10;
+            self.finalButtonConstant = NSLayoutAttributeLeft;
+            self.finalButtonConstant1 = 15;
+            break;
+            case TJLBarButtonMenuLeftTop:
+            self.rightLeftPosition = NSLayoutAttributeLeft;
+            self.initialButtonConstant = 10;
+            self.finalButtonConstant = NSLayoutAttributeRight;
+            self.finalButtonConstant1 = -15;
+            break;
+        default:
+            break;
+    }
+}
+- (instancetype)initWithView:(UIView *)view images:(NSArray *)images buttonTitles:(NSArray *)titles position:(TJLBarButtonMenuSide)position {
+    return [self initWithView:view delegate:nil images:images buttonTitles:titles position:position];
 }
 
 - (void)buttonTapped:(UIButton *)sender {
@@ -116,18 +138,18 @@
     [self layoutSubviews];
     [self.parentView addConstraints:@[
             [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.parentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:44],
-            [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.parentView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]
+            [NSLayoutConstraint constraintWithItem:self attribute:self.rightLeftPosition relatedBy:NSLayoutRelationEqual toItem:self.parentView attribute:self.rightLeftPosition multiplier:1.0 constant:0]
     ]];
     [self.parentView layoutSubviews];
     self.firstConstraints = @[
             @[[NSLayoutConstraint
                     constraintWithItem:self.buttonArray[0]
-                             attribute:NSLayoutAttributeLeft
+                             attribute:self.finalButtonConstant
                              relatedBy:NSLayoutRelationEqual
                                 toItem:self
-                             attribute:NSLayoutAttributeLeft
+                             attribute:self.finalButtonConstant
                             multiplier:1.0
-                              constant:15],
+                              constant:self.finalButtonConstant1],
                     [NSLayoutConstraint
                             constraintWithItem:self.buttonArray[0]
                                      attribute:NSLayoutAttributeTop
@@ -140,10 +162,10 @@
             @[
                     [NSLayoutConstraint
                             constraintWithItem:self.buttonArray[1]
-                                     attribute:NSLayoutAttributeLeft
+                                     attribute:self.finalButtonConstant
                                      relatedBy:NSLayoutRelationEqual
                                         toItem:self
-                                     attribute:NSLayoutAttributeLeft
+                                     attribute:self.finalButtonConstant
                                     multiplier:1.0
                                       constant:0],
                     [NSLayoutConstraint
@@ -158,12 +180,12 @@
             @[
                     [NSLayoutConstraint
                             constraintWithItem:self.buttonArray[2]
-                                     attribute:NSLayoutAttributeRight
+                                     attribute:self.rightLeftPosition
                                      relatedBy:NSLayoutRelationEqual
                                         toItem:self
-                                     attribute:NSLayoutAttributeRight
+                                     attribute:self.rightLeftPosition
                                     multiplier:1.0
-                                      constant:-10],
+                                      constant:self.initialButtonConstant],
                     [NSLayoutConstraint
                             constraintWithItem:self.buttonArray[2]
                                      attribute:NSLayoutAttributeBottom

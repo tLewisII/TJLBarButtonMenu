@@ -19,14 +19,17 @@
  */
 - (void)buttonMenu:(TJLBarButtonMenu *)buttonMenu titleForTappedButton:(NSString *)title;
 @end
-
+typedef NS_ENUM(NSInteger, TJLBarButtonMenuSide) {
+    TJLBarButtonMenuRightTop,
+    TJLBarButtonMenuLeftTop
+};
 typedef void (^TJLButtonTappedBlock)(TJLBarButtonMenu *buttonView, NSString *title);
 
 @interface TJLBarButtonMenu : UIView
 
-- (instancetype)initWithView:(UIView *)view images:(NSArray *)images buttonTitles:(NSArray *)titles;
+- (instancetype)initWithView:(UIView *)view images:(NSArray *)images buttonTitles:(NSArray *)titles position:(TJLBarButtonMenuSide)position;
 
-- (instancetype)initWithView:(UIView *)view delegate:(id <TJLButtonViewDelegate>)delegate images:(NSArray *)images buttonTitles:(NSArray *)titles;
+- (instancetype)initWithView:(UIView *)view delegate:(id <TJLButtonViewDelegate>)delegate images:(NSArray *)images buttonTitles:(NSArray *)titles position:(TJLBarButtonMenuSide)position;
 
 - (void)show;
 

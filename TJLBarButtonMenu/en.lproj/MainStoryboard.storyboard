@@ -14,8 +14,13 @@
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jPA-mf-eb0">
                                 <items>
+                                    <barButtonItem title="Left" id="wwV-Uh-xe1">
+                                        <connections>
+                                            <action selector="showLeft:" destination="2" id="eox-ep-aiY"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="AA8-Yp-dhC"/>
-                                    <barButtonItem title="Item" id="uSv-Fz-Vd3">
+                                    <barButtonItem title="Right" id="uSv-Fz-Vd3">
                                         <connections>
                                             <action selector="showRight:" destination="2" id="H5e-Tc-mDU"/>
                                         </connections>

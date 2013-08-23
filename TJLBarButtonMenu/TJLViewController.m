@@ -10,7 +10,7 @@
 #import "TJLBarButtonMenu.h"
 
 @interface TJLViewController ()
-@property(strong, nonatomic) TJLBarButtonMenu *barMenu;
+
 @end
 
 @implementation TJLViewController
@@ -27,12 +27,25 @@
             [UIImage imageNamed:@"Green"],
             [UIImage imageNamed:@"Orange"]
     ];
-    self.barMenu = [[TJLBarButtonMenu alloc]initWithView:self.view images:images buttonTitles:@[@"1", @"2", @"3"]];
+    TJLBarButtonMenu *barMenu = [[TJLBarButtonMenu alloc]initWithView:self.view images:images buttonTitles:@[@"1", @"2", @"3"] position:TJLBarButtonMenuRightTop];
    
-    [self.barMenu setButtonTappedBlock:^(TJLBarButtonMenu *buttonView, NSString *title) {
+    [barMenu setButtonTappedBlock:^(TJLBarButtonMenu *buttonView, NSString *title) {
         NSLog(@"%@", title);
     }];
-    [self.barMenu show];
+    [barMenu show];
+}
+- (IBAction)showLeft:(UIBarButtonItem *)sender {
+    NSArray *images = @[
+                        [UIImage imageNamed:@"Blue"],
+                        [UIImage imageNamed:@"Green"],
+                        [UIImage imageNamed:@"Orange"]
+                        ];
+    TJLBarButtonMenu *barMenu = [[TJLBarButtonMenu alloc]initWithView:self.view images:images buttonTitles:@[@"1", @"2", @"3"] position:TJLBarButtonMenuLeftTop];
+    
+    [barMenu setButtonTappedBlock:^(TJLBarButtonMenu *buttonView, NSString *title) {
+        NSLog(@"%@", title);
+    }];
+    [barMenu show];
 }
 
 @end
