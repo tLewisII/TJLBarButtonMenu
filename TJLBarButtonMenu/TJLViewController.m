@@ -28,10 +28,9 @@
             [UIImage imageNamed:@"Orange"]
     ];
     self.barMenu = [[TJLBarButtonMenu alloc]initWithView:self.view images:images buttonTitles:@[@"1", @"2", @"3"]];
-    __weak id weakSelf = self;
+   
     [self.barMenu setButtonTappedBlock:^(TJLBarButtonMenu *buttonView, NSString *title) {
-        __strong id strongSelf = weakSelf;
-        [strongSelf performSegueWithIdentifier:@"segue" sender:nil];
+        NSLog(@"%@", title);
     }];
     [self.barMenu show];
 }
