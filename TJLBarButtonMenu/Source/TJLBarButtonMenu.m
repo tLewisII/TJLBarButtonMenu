@@ -13,7 +13,7 @@
 }
 @property(strong, nonatomic) NSMutableArray *constraintsArray;
 @property(strong, nonatomic) NSMutableArray *firstConstraints;
-@property(strong, nonatomic) UIView *parentView;
+@property(strong, nonatomic) UIViewController *parentView;
 @property(strong, nonatomic) NSMutableArray *buttonArray;
 @property(strong, nonatomic) id <TJLButtonViewDelegate> delegate;
 @property(nonatomic)NSInteger rightLeftPosition;
@@ -23,11 +23,11 @@
 @end
 
 @implementation TJLBarButtonMenu
-- (instancetype)initWithView:(UIView *)view delegate:(id)delegate images:(NSArray *)images buttonTitles:(NSArray *)titles position:(TJLBarButtonMenuSide)position {
+- (instancetype)initWithViewController:(UIViewController *)viewController delegate:(id)delegate images:(NSArray *)images buttonTitles:(NSArray *)titles position:(TJLBarButtonMenuSide)position {
     self = [super init];
     if(self) {
         [self setupPositions:position];
-        self.parentView = view;
+        self.parentView = viewController;
         if(delegate) self.delegate = delegate;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         [self addConstraints:@[
@@ -120,8 +120,8 @@
             break;
     }
 }
-- (instancetype)initWithView:(UIView *)view images:(NSArray *)images buttonTitles:(NSArray *)titles position:(TJLBarButtonMenuSide)position {
-    return [self initWithView:view delegate:nil images:images buttonTitles:titles position:position];
+- (instancetype)initWithViewController:(UIViewController *)viewController images:(NSArray *)images buttonTitles:(NSArray *)titles position:(TJLBarButtonMenuSide)position {
+    return [self initWithViewController:viewController delegate:nil images:images buttonTitles:titles position:position];
 }
 
 - (void)buttonTapped:(UIButton *)sender {
@@ -134,13 +134,14 @@
 }
 
 - (void)show {
-    [self.parentView addSubview:self];
+    [self.parentView.view addSubview:self];
     [self layoutSubviews];
-    [self.parentView addConstraints:@[
-            [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.parentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:44],
-            [NSLayoutConstraint constraintWithItem:self attribute:self.rightLeftPosition relatedBy:NSLayoutRelationEqual toItem:self.parentView attribute:self.rightLeftPosition multiplier:1.0 constant:0]
+    CGFloat position = (self.parentView.navigationController) ? 0 : 44;
+    [self.parentView.view addConstraints:@[
+            [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.parentView.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:position],
+            [NSLayoutConstraint constraintWithItem:self attribute:self.rightLeftPosition relatedBy:NSLayoutRelationEqual toItem:self.parentView.view attribute:self.rightLeftPosition multiplier:1.0 constant:0]
     ]];
-    [self.parentView layoutSubviews];
+    [self.parentView.view layoutSubviews];
     self.firstConstraints = [@[
             @[[NSLayoutConstraint
                     constraintWithItem:self.buttonArray[0]
@@ -199,7 +200,9 @@
                                               constant:0]
                             ];
     }
-    
+    ///You may see this and think to yourself, why is this not in a loop? It is not in a loop because UIButton's `hidden` property cannot
+    ///be animated, so if it was run in a loop it would look weird, with buttons chilling on the bar button item before they moved.
+    ///Setting the `alpha = 0` then animating it to 1.0 is an option, but it does not look as good, and since this is a small component, it can stay like this.
     [UIView animateWithDuration:.15 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         [self.buttonArray[0] setHidden:NO];
         [self removeConstraints:self.constraintsArray[0]];
@@ -222,7 +225,6 @@
             }                completion:nil];
         }];
     }];
-
 }
 
 - (void)hide:(NSString *)buttonTitle {

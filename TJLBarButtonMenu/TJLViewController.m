@@ -26,7 +26,7 @@
             [UIImage imageNamed:@"Blue"],
             [UIImage imageNamed:@"Green"]
     ];
-    TJLBarButtonMenu *barMenu = [[TJLBarButtonMenu alloc]initWithView:self.view
+    TJLBarButtonMenu *barMenu = [[TJLBarButtonMenu alloc]initWithViewController:self
                                                                images:images
                                                          buttonTitles:@[@"1", @"2"]
                                                              position:TJLBarButtonMenuRightTop];
@@ -42,7 +42,7 @@
                         [UIImage imageNamed:@"Green"],
                         [UIImage imageNamed:@"Orange"]
                         ];
-    TJLBarButtonMenu *barMenu = [[TJLBarButtonMenu alloc]initWithView:self.view
+    TJLBarButtonMenu *barMenu = [[TJLBarButtonMenu alloc]initWithViewController:self
                                                                images:images
                                                          buttonTitles:@[@"1", @"2", @"3"]
                                                              position:TJLBarButtonMenuLeftTop];
