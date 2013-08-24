@@ -1,5 +1,5 @@
 <h1>TJLBarButtonMenu</h1>
-A simple 3 button menu that is meant to be launched from a bar button item.
+A simple 3 button menu with a nice presentation and dismissal animation that is meant to be launched from a bar button item.
 ![Two Buttons](http://ploverproductions.com/images/TJLBarButtonMenuL.png?raw=true)&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 ![One Buttons](http://ploverproductions.com/images/TJLBarButtonMenuR.png?raw=true)
 <h2>Installation</h2>
