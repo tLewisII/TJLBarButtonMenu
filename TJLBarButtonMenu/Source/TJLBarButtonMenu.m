@@ -16,101 +16,104 @@
 @property(strong, nonatomic) UIViewController *parentView;
 @property(strong, nonatomic) NSMutableArray *buttonArray;
 @property(strong, nonatomic) id <TJLButtonViewDelegate> delegate;
-@property(nonatomic)NSInteger rightLeftPosition;
-@property(nonatomic)NSInteger initialButtonConstant;
-@property(nonatomic)NSInteger finalButtonConstant;
-@property(nonatomic)NSInteger finalButtonConstant1;
+@property(nonatomic) NSLayoutAttribute rightLeftPosition;
+@property(nonatomic) NSLayoutAttribute initialButtonConstant;
+@property(nonatomic) NSLayoutAttribute finalButtonConstant;
+@property(nonatomic) NSLayoutAttribute finalButtonConstant1;
 @end
 
 @implementation TJLBarButtonMenu
 - (instancetype)initWithViewController:(UIViewController *)viewController delegate:(id)delegate images:(NSArray *)images buttonTitles:(NSArray *)titles position:(TJLBarButtonMenuSide)position {
     self = [super init];
-    if(self) {
-        [self setupPositions:position];
-        self.parentView = viewController;
-        if(delegate) self.delegate = delegate;
-        self.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addConstraints:@[
+    if(!self) {
+        return nil;
+    }
+    [self setupPositions:position];
+    self.parentView = viewController;
+    if(delegate) self.delegate = delegate;
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addConstraints:@[
+            [NSLayoutConstraint
+                    constraintWithItem:self
+                             attribute:NSLayoutAttributeWidth
+                             relatedBy:NSLayoutRelationEqual
+                                toItem:nil
+                             attribute:NSLayoutAttributeNotAnAttribute
+                            multiplier:1.0
+                              constant:150],
+            [NSLayoutConstraint
+                    constraintWithItem:self
+                             attribute:NSLayoutAttributeHeight
+                             relatedBy:NSLayoutRelationEqual
+                                toItem:self
+                             attribute:NSLayoutAttributeWidth
+                            multiplier:1.0
+                              constant:0]
+    ]];
+    self.backgroundColor = [UIColor clearColor];
+    self.buttonArray = [NSMutableArray new];
+    self.constraintsArray = [NSMutableArray new];
+
+    for(NSUInteger i = 0; i < images.count; i++) {
+        UIButton *b = [UIButton buttonWithType:UIButtonTypeCustom];
+        b.translatesAutoresizingMaskIntoConstraints = NO;
+        [b setImage:images[i] forState:UIControlStateNormal];
+        b.hidden = YES;
+        [b addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        [b setTitle:titles[i] forState:UIControlStateDisabled];
+        self.buttonArray[i] = b;
+        [self addSubview:b];
+        NSLayoutConstraint *first = [NSLayoutConstraint
+                constraintWithItem:b
+                         attribute:NSLayoutAttributeTop
+                         relatedBy:NSLayoutRelationEqual
+                            toItem:self
+                         attribute:NSLayoutAttributeTop
+                        multiplier:1.0
+                          constant:-40];
+        NSLayoutConstraint *second = [NSLayoutConstraint
+                constraintWithItem:b
+                         attribute:self.rightLeftPosition
+                         relatedBy:NSLayoutRelationEqual
+                            toItem:self
+                         attribute:self.rightLeftPosition
+                        multiplier:1.0
+                          constant:self.initialButtonConstant];
+        [self.constraintsArray addObject:@[first, second]];
+        [self addConstraints:@[first, second]];
+        [b addConstraints:@[
                 [NSLayoutConstraint
-                        constraintWithItem:self
+                        constraintWithItem:b
                                  attribute:NSLayoutAttributeWidth
-                                 relatedBy:NSLayoutRelationEqual
+                                 relatedBy:NSLayoutRelationLessThanOrEqual
                                     toItem:nil
                                  attribute:NSLayoutAttributeNotAnAttribute
                                 multiplier:1.0
-                                  constant:150],
+                                  constant:50],
                 [NSLayoutConstraint
-                        constraintWithItem:self
+                        constraintWithItem:b
                                  attribute:NSLayoutAttributeHeight
-                                 relatedBy:NSLayoutRelationEqual
-                                    toItem:self
+                                 relatedBy:NSLayoutRelationLessThanOrEqual
+                                    toItem:b
                                  attribute:NSLayoutAttributeWidth
                                 multiplier:1.0
                                   constant:0]
         ]];
-        self.backgroundColor = [UIColor clearColor];
-        self.buttonArray = [NSMutableArray new];
-        self.constraintsArray = [NSMutableArray new];
 
-        for(NSUInteger i = 0; i < images.count; i++) {
-            UIButton *b = [UIButton buttonWithType:UIButtonTypeCustom];
-            b.translatesAutoresizingMaskIntoConstraints = NO;
-            [b setImage:images[i] forState:UIControlStateNormal];
-            b.hidden = YES;
-            [b addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-            [b setTitle:titles[i] forState:UIControlStateDisabled];
-            self.buttonArray[i] = b;
-            [self addSubview:b];
-            NSLayoutConstraint *first = [NSLayoutConstraint
-                    constraintWithItem:b
-                             attribute:NSLayoutAttributeTop
-                             relatedBy:NSLayoutRelationEqual
-                                toItem:self
-                             attribute:NSLayoutAttributeTop
-                            multiplier:1.0
-                              constant:-40];
-            NSLayoutConstraint *second = [NSLayoutConstraint
-                    constraintWithItem:b
-                             attribute:self.rightLeftPosition
-                             relatedBy:NSLayoutRelationEqual
-                                toItem:self
-                             attribute:self.rightLeftPosition
-                            multiplier:1.0
-                              constant:self.initialButtonConstant];
-            [self.constraintsArray addObject:@[first, second]];
-            [self addConstraints:@[first, second]];
-            [b addConstraints:@[
-                    [NSLayoutConstraint
-                            constraintWithItem:b
-                                     attribute:NSLayoutAttributeWidth
-                                     relatedBy:NSLayoutRelationLessThanOrEqual
-                                        toItem:nil
-                                     attribute:NSLayoutAttributeNotAnAttribute
-                                    multiplier:1.0
-                                      constant:50],
-                    [NSLayoutConstraint
-                            constraintWithItem:b
-                                     attribute:NSLayoutAttributeHeight
-                                     relatedBy:NSLayoutRelationLessThanOrEqual
-                                        toItem:b
-                                     attribute:NSLayoutAttributeWidth
-                                    multiplier:1.0
-                                      constant:0]
-            ]];
-
-        }
     }
+
     return self;
 }
--(void)setupPositions:(TJLBarButtonMenuSide)position {
-    switch (position) {
+
+- (void)setupPositions:(TJLBarButtonMenuSide)position {
+    switch(position) {
         case TJLBarButtonMenuRightTop:
             self.rightLeftPosition = NSLayoutAttributeRight;
             self.initialButtonConstant = -10;
             self.finalButtonConstant = NSLayoutAttributeLeft;
             self.finalButtonConstant1 = 15;
             break;
-            case TJLBarButtonMenuLeftTop:
+        case TJLBarButtonMenuLeftTop:
             self.rightLeftPosition = NSLayoutAttributeLeft;
             self.initialButtonConstant = 10;
             self.finalButtonConstant = NSLayoutAttributeRight;
@@ -120,6 +123,7 @@
             break;
     }
 }
+
 - (instancetype)initWithViewController:(UIViewController *)viewController images:(NSArray *)images buttonTitles:(NSArray *)titles position:(TJLBarButtonMenuSide)position {
     return [self initWithViewController:viewController delegate:nil images:images buttonTitles:titles position:position];
 }
@@ -178,27 +182,27 @@
                                     multiplier:1.0
                                       constant:-15]
             ]
-    ]mutableCopy];
-    
+    ] mutableCopy];
+
     if(self.buttonArray.count > 2) {
         self.firstConstraints[2] = @[
-                            [NSLayoutConstraint
-                                    constraintWithItem:self.buttonArray[2]
-                                             attribute:self.finalButtonConstant
-                                             relatedBy:NSLayoutRelationEqual
-                                                toItem:self
-                                             attribute:self.finalButtonConstant
-                                            multiplier:1.0
-                                              constant:0],
-                            [NSLayoutConstraint
-                                    constraintWithItem:self.buttonArray[2]
-                                             attribute:NSLayoutAttributeBottom
-                                             relatedBy:NSLayoutRelationEqual
-                                                toItem:self
-                                             attribute:NSLayoutAttributeBottom
-                                            multiplier:1.0
-                                              constant:0]
-                            ];
+                [NSLayoutConstraint
+                        constraintWithItem:self.buttonArray[2]
+                                 attribute:self.finalButtonConstant
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self
+                                 attribute:self.finalButtonConstant
+                                multiplier:1.0
+                                  constant:0],
+                [NSLayoutConstraint
+                        constraintWithItem:self.buttonArray[2]
+                                 attribute:NSLayoutAttributeBottom
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self
+                                 attribute:NSLayoutAttributeBottom
+                                multiplier:1.0
+                                  constant:0]
+        ];
     }
     ///You may see this and think to yourself, why is this not in a loop? It is not in a loop because UIButton's `hidden` property cannot
     ///be animated, so if it was run in a loop it would look weird, with buttons chilling on the bar button item before they moved.
