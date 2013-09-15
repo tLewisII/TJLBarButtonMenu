@@ -28,7 +28,7 @@
     ];
     TJLBarButtonMenu *barMenu = [[TJLBarButtonMenu alloc]initWithViewController:self
                                                                images:images
-                                                         buttonTitles:@[@"1", @"2"]
+                                                         buttonTitles:@[@"Blue", @"Green"]
                                                              position:TJLBarButtonMenuRightTop];
    
     [barMenu setButtonTappedBlock:^(TJLBarButtonMenu *buttonView, NSString *title) {
@@ -44,7 +44,7 @@
                         ];
     TJLBarButtonMenu *barMenu = [[TJLBarButtonMenu alloc]initWithViewController:self
                                                                images:images
-                                                         buttonTitles:@[@"1", @"2", @"3"]
+                                                         buttonTitles:@[@"Blue", @"Green", @"Orange"]
                                                              position:TJLBarButtonMenuLeftTop];
     
     [barMenu setButtonTappedBlock:^(TJLBarButtonMenu *buttonView, NSString *title) {

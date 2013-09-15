@@ -7,7 +7,8 @@
 //
 
 #import "TJLBarButtonMenu.h"
-
+#import <objc/runtime.h>
+static char key = 'b';
 @interface TJLBarButtonMenu () {
     TJLButtonTappedBlock buttonTappedBlock;
 }
@@ -60,7 +61,7 @@
         [b setImage:images[i] forState:UIControlStateNormal];
         b.hidden = YES;
         [b addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        [b setTitle:titles[i] forState:UIControlStateDisabled];
+        objc_setAssociatedObject(b, &key, titles[i], OBJC_ASSOCIATION_ASSIGN);
         self.buttonArray[i] = b;
         [self addSubview:b];
         NSLayoutConstraint *first = [NSLayoutConstraint
@@ -129,7 +130,7 @@
 }
 
 - (void)buttonTapped:(UIButton *)sender {
-    NSString *title = [sender titleForState:UIControlStateDisabled];
+    NSString *title = objc_getAssociatedObject(sender, &key);
     [self hide:title];
 }
 
