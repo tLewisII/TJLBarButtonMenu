@@ -16,7 +16,6 @@ static char key = 'b';
 @property(strong, nonatomic) NSMutableArray *firstConstraints;
 @property(strong, nonatomic) UIViewController *parentView;
 @property(strong, nonatomic) NSMutableArray *buttonArray;
-@property(strong, nonatomic) id <TJLButtonViewDelegate> delegate;
 @property(nonatomic) NSLayoutAttribute rightLeftPosition;
 @property(nonatomic) NSLayoutAttribute initialButtonConstant;
 @property(nonatomic) NSLayoutAttribute finalButtonConstant;
@@ -252,8 +251,9 @@ static char key = 'b';
                     [self layoutIfNeeded];
                 }
             }                completion:^(BOOL final) {
+                id<TJLButtonViewDelegate>strongDelegate = self.delegate;
                 if(buttonTappedBlock) buttonTappedBlock(self, buttonTitle);
-                if([self.delegate respondsToSelector:@selector(buttonMenu:titleForTappedButton:)]) [self.delegate buttonMenu:self titleForTappedButton:buttonTitle];
+                if([strongDelegate respondsToSelector:@selector(buttonMenu:titleForTappedButton:)]) [strongDelegate buttonMenu:self titleForTappedButton:buttonTitle];
                 [self removeFromSuperview];
             }];
         }];

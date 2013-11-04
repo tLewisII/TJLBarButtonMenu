@@ -60,4 +60,6 @@ typedef void (^TJLButtonTappedBlock)(TJLBarButtonMenu *buttonView, NSString *tit
  */
 - (void)setButtonTappedBlock:(TJLButtonTappedBlock)block;
 
+///The delegate
+@property(weak, nonatomic) id <TJLButtonViewDelegate> delegate;
 @end
