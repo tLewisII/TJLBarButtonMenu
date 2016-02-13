@@ -4,7 +4,7 @@ A simple 3 button menu with a nice presentation and dismissal animation that is 
 ![One Buttons](http://ploverproductions.com/images/TJLBarButtonMenuR.png?raw=true)
 <h2>Installation</h2>
 <hr>
-Use [Cocoapods](http://www.cocoapods.org), `pod 'TJLBarButtonMenu', '1.0.0'`, or just grab the source folder and drop it into your project.
+Use [CocoaPods](http://www.cocoapods.org), `pod 'TJLBarButtonMenu', '1.0.0'`, or just grab the source folder and drop it into your project.
 <h2>Usage</h2>
 <hr>
 `+initWithViewController:images:buttonTitles:position:`<br>
